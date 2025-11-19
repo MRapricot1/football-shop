@@ -1,3 +1,23 @@
+Tugas 9:
+
+1. Saya menggunakan model Dart agar data dari JSON memiliki tipe yang jelas, aman dari error null, serta lebih mudah di-maintain. Jika hanya memakai Map<String, dynamic>, rawan terjadi typo, salah tipe, dan sulit melakukan refactor.
+
+2. Perbedaan http dan CookieRequest adalah, Package http digunakan untuk request biasa yang tidak membutuhkan session. Sementara CookieRequest menyimpan cookie Django sehingga dapat digunakan untuk autentikasi login dan menjaga session pengguna.
+
+3. Alasan saya membagikan instance CookieRequest adalah saya membuat satu instance CookieRequest dan membagikannya ke seluruh widget melalui Provider, supaya semua halaman menggunakan session dan cookie yang sama, sehingga status login konsisten di seluruh aplikasi.
+
+4. Konfigurasi konektivitas Flutter ↔ Django
+Saya menambahkan 10.0.2.2 di ALLOWED_HOSTS, mengaktifkan CORS, mengatur cookie/SameSite, dan menambah izin internet Android agar emulator dapat terhubung dengan server Django. Tanpa konfigurasi ini, request dapat ditolak atau cookie tidak terkirim.
+
+5. Alur pengiriman data dari Flutter ke Django, data input dari form Flutter dikirim lewat request HTTP/POST ke Django. Django memproses dan mengembalikan JSON, lalu Flutter mem-parsing respons tersebut ke model Dart dan menampilkannya di UI.
+
+6. Mekanisme autentikasi (register–login–logout) Flutter mengirim data register/login ke Django, Django membuat session dan mengirim cookie, dan CookieRequest menyimpannya untuk request berikutnya. Logout menghapus session di Django dan menghapus cookie di Flutter.
+
+7. Implementasi checklist secara bertahap, Saya memulai dari setup Django dan endpoint API, konfigurasi CORS dan session, membuat model Dart, menyiapkan CookieRequest sebagai global state, membuat halaman autentikasi, menampilkan data dari server, dan mengirim data baru melalui form.
+
+
+
+Tugas 8:
 1. Perbedaan antara Navigator.push() dan Navigator.pushReplacement() adalah, pada Navigator.push (route):
 - menimpa layar di atas stack tetapi layar yang lama tetap ada
 - Membuat tombol back menjadi masih bisa balik ke layar sebelumnya
@@ -72,6 +92,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+Tugas 7:
 1. Widget tree merupakan sebuah struktur yang penting dari semua widge yang digunakan dalam Flutter.
 Flutter membangun tampilan UI dengan cara menyusun widget dari yang parent hingga ke child atau paling Bawah. Setiap parent widget dapat memiliki satu atau lebih child widget di dalamnya. Parent juga bertanggung jawab dalam mengatur posisi, style, dan behaviour child. Jadi pada dasarnya widget tree adalah struktur UI tree Flutter, tempat setiap widget terhubung secara hierarki dan saling memengaruhi satu ama lain.
 
